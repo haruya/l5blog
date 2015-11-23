@@ -11,6 +11,7 @@ class ArticlesController extends Controller {
 
 	public function __construct(Article $article)
 	{
+		$this->middleware('auth');
 		$this->article = $article;
 	}
 
@@ -19,7 +20,8 @@ class ArticlesController extends Controller {
 	 */
 	public function getIndex()
 	{
-		$articles = $this->article->all();
+		\Log::error('エラーログテスト');
+		$articles = Article::latest('updated_at')->paginate(3);
 		return view('articles.index')->with(compact('articles'));
 	}
 
@@ -80,6 +82,7 @@ class ArticlesController extends Controller {
 	{
 		$article = $this->article->find($id);
 		$article->delete();
+		\Session::flash('flash_message', '記事を削除しました。');
 
 		return redirect()->to('articles/index');
 	}

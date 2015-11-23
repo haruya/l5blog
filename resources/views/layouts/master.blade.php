@@ -23,6 +23,11 @@
 		<div class="row">
 			<h1>L5Blog</h1>
 			<div class="col-md-12">
+				{{-- フラッシュメッセージの表示 --}}
+				@if (Session::has('flash_message'))
+				<div class="alert alert-success">{{Session::get('flash_message')}}</div>
+				@endif
+
 				@yield('content')
 			</div>
 		</div>

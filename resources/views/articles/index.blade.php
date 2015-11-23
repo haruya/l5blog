@@ -33,4 +33,5 @@
 		@endforeach
 		</tbody>
 	</table>
+	{!!$articles->render()!!}
 @stop
